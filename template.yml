@@ -1,0 +1,236 @@
+
+# Main template configuration file. Find documentation here: 
+# https://developers.flourish.studio/sdk/api-reference/template-yml/
+
+id: election-results-chart
+name: Election results chart
+author: Flourish team
+description: >-
+  A stacked bar chart ideal for election results. Includes a coalition builder
+  feature
+sdk_version: 3
+categories: [ election, chart, bar ]
+build:
+  src:
+    script: npm run build
+    directory: src
+    files:
+      - rollup.config.js
+  less:
+    script: npm run less
+    directory: less
+# Settings to allow users to change a property in the template. You can define
+# the default state for these properties inside state.js. 
+settings:
+
+  - Chart styles
+  - property: bar_height
+    new_section: Bar
+    name: Height
+    type: number
+    min: 0.1
+    step: 0.1
+    width: half
+  - property: bar_background
+    name: Background
+    description: Background color of part of chart that's not filled with data (ie. when filtering parties)
+    type: color
+    width: half
+  - property: show_party_name
+    new_section: Labels
+    name: Show party name
+    width: half
+    type: boolean
+  - property: label_font_size
+    name: Text size
+    type: number
+    width: quarter
+    min: 0
+    step: 0.1
+  - property: label_font_color
+    name: Text colour
+    type: color
+    width: quarter
+  - property: use_custom_scale
+    description: >-
+      On default, will use the sum of all data points as the max value. Enable
+      this setting to use a custom value
+    new_section: Scale
+    name: Scale type
+    type: boolean
+    style: buttons
+    width: half
+    choices:
+      -
+        - Auto
+        - false
+      -
+        - Custom
+        - true
+  - property: custom_scale_max
+    description: >-
+      This will set the maximum value of the scale. Eg. the total amount of
+      seats to be won in an election
+    name: Max value for scale
+    type: number
+    width: half
+    show_if: use_custom_scale
+
+  - Threshold line
+  - property: middle_line_position
+    new_section: Label
+    name: Position
+    type: number
+    width: half
+  - property: middle_line_content
+    name: Text
+    type: string
+    width: quarter
+  - property: middle_line_text_color
+    name: Colour
+    type: color
+    optional: true
+    width: quarter
+  - property: middle_line_dashoffset
+    new_section: Line
+    description: 'eg. 2,2'
+    name: Dash width and offset
+    type: string
+    width: half
+  - property: middle_line_width
+    name: Thickness
+    type: number
+    width: quarter
+    min: 0
+  - property: middle_line_color
+    name: Colour
+    type: color
+    optional: true
+    width: quarter
+
+  - Colors
+  - property: color
+    import: "@flourish/colors"
+    overrides:
+      - tag: numeric
+        show_if: false
+
+  - Controls
+  - property: filter_control
+    import: "@flourish/controls"
+    overrides:
+      - property: control_type
+        new_section: false
+  - property: controls_container
+    import: "@flourish/controls/container"
+    overrides:
+      - property: controls_spacing
+        hide_if: true
+  - property: controls_style
+    import: "@flourish/ui-styles/controls-style"
+  - property: dropdown_style
+    import: "@flourish/ui-styles/dropdown-style"
+    show_if:
+      filter_control.control_type: "dropdown"
+  - property: button_style
+    import: "@flourish/ui-styles/button-style"
+    show_if:
+      filter_control.control_type: "buttons"
+  - property: slider_style
+    import: "@flourish/ui-styles/slider-style"
+    show_if:
+      filter_control.control_type: "slider"
+
+  - Legend
+  - property: legend_categorical
+    import: "@flourish/legend/discrete-color"
+    overrides:
+      - property: show_legend
+        new_section: Legend
+  - property: legend_container
+    import: '@flourish/legend/container'
+    overrides:
+      - property: orientation
+        show_if: false
+  - property: legend_position
+    name: Position
+    type: string
+    style: buttons
+    choices:
+      -
+        - Below
+        - below
+      -
+        - Above
+        - above
+    show_if: 
+      legend_categorical.show_legend: true
+  - property: hide_empty_legend_items
+    name: Hide zero-valued entries
+    type: boolean
+    show_if: 
+      legend_categorical.show_legend: true
+  - Text and translation
+  - property: placeholder_text
+    name: No data placeholder text
+    description: Placeholder text if there is no data
+    type: string
+  - property: subtitle_text
+    name: Text below results
+    type: string
+  - property: value_change_abbreviation
+    name: Value change abbreviation
+    description: A suffix used to describe the percentage point change since the previous election
+    type: string
+    width: half
+  - Popups & panels
+  - property: popup
+    import: "@flourish/info-popup"
+  - Number formatting
+  - property: label_format
+    import: "@flourish/number-formatter"
+    overrides:
+      - property: advanced
+        width: full
+  - property: label_suffix
+    type: string
+    description: Suffix used to compare current and historical results. For example, "%" when data measures vote shares, or "seats" when data measures seats won.
+    name: Historical label suffix
+    width: half
+  - property: localization
+    import: "@flourish/number-localization"
+  - Layout
+  - property: layout
+    import: "@flourish/layout"
+
+# Define datasets and bindings. The dataset property refers to the name of the
+# relevant csv file in your data folder. You can have multiple datasets.
+data:
+  - Current results
+  - name: Region name
+    description: 'The name of the data series (eg. voting district, data mode)'
+    dataset: values_now
+    key: name
+    type: column
+    column: 'Current data::A'
+  - name: Results by party
+    description: 'One column per party, with party names as header rows.'
+    dataset: values_now
+    key: values
+    type: columns
+    columns: 'Current data::B-H'
+
+  - Historical results
+  - name: Region name
+    description: 'The name of the data series (eg. voting district, data mode)'
+    dataset: values_historical
+    key: name
+    type: column
+    column: 'Historical data::A'
+    optional: true
+  - name: Results by party
+    description: 'One column per party, with party names as header rows.'
+    dataset: values_historical
+    key: values
+    type: columns
+    columns: 'Historical data::B-H'

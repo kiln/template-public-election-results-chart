@@ -1,0 +1,33 @@
+/* Styles go in this file. */
+
+html, body { height: auto; margin: 0; overflow: hidden; }
+
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+	-webkit-font-smoothing:antialiased;
+}
+
+#wrapper {
+	overflow: hidden;
+	&:after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+}
+
+#graphic {
+	display: block;
+}
+
+.party-name {
+	font-weight:700;
+}
+
+.flourish-popup-content {
+	pointer-events: none !important;
+}
+
+.flourish-footer {
+	clear: both;
+}

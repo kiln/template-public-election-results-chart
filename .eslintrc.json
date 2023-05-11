@@ -1,0 +1,9 @@
+{
+    "plugins": [
+        "@flourish/flourish"
+    ],
+    "env": {
+    	"browser": true
+    },
+    "extends": "plugin:@flourish/flourish/flourish"
+}

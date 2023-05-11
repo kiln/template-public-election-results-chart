@@ -1,0 +1,44 @@
+{
+  "name": "template-election-results-chart",
+  "type": "module",
+  "version": "9.0.0-prerelease.0",
+  "description": "A template for use on flourish.studio",
+  "main": "template.js",
+  "author": "Flourish",
+  "license": "MIT",
+  "keywords": [
+    "flourish"
+  ],
+  "scripts": {
+    "prepare": "touch template.js",
+    "start": "flourish run",
+    "build": "rollup -c",
+    "watch": "rollup -c --watch",
+    "less": "lessc --plugin=less-plugin-clean-css --source-map less/style.less static/style.css",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "@flourish/colors": "^6.1.5",
+    "@flourish/controls": "^8.0.0",
+    "@flourish/info-popup": "^6.0.0",
+    "@flourish/layout": "^5.9.2",
+    "@flourish/legend": "^6.5.2",
+    "@flourish/number-formatter": "^1.0.0",
+    "@flourish/number-localization": "0.0.1",
+    "@flourish/pocket-knife": "^1.1.1",
+    "@flourish/ui-styles": "^5.0.0",
+    "d3-request": "^1.0.6",
+    "d3-scale": "^4.0.2",
+    "d3-selection": "^3.0.0",
+    "d3-transition": "^3.0.1"
+  },
+  "devDependencies": {
+    "@flourish/eslint-plugin-flourish": "^0.7.2",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-terser": "^0.4.0",
+    "eslint": "^8.37.0",
+    "less": "^4.1.3",
+    "less-plugin-clean-css": "1.5.1",
+    "rollup": "^3.20.2"
+  }
+}
