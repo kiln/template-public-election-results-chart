@@ -97,7 +97,9 @@ function updateGraphic(transition_duration) {
 
 	// Create bar segments for the chart based on our processed_data
 	var bar = g_bar.selectAll(".bar").data(processed_data);
-	var bar_enter = bar.enter().append("g").attr("class", "bar");
+	var bar_enter = bar.enter()
+		.append("g")
+		.attr("class", "bar");
 
 	// Append elements of each bar segment in the enter selection
 	bar_enter.append("rect")
@@ -114,7 +116,10 @@ function updateGraphic(transition_duration) {
 	bar.exit().remove();
 
 	// Animate the horizontal position of bar segments (e.g. when the filter is changed)
-	bar_update.transition()
+	bar_update
+		// This is is used for popup locking functionality (see popup.js)
+		.attr("id", d => d.name.toLowerCase().replace(/\s+/g, ""))
+		.transition()
 		.duration(transition_duration)
 		.attr("transform", function(d) {
 			return "translate(" + x(d.x) + ", 0)";
