@@ -9,6 +9,12 @@ import initFormatter from "@flourish/number-formatter";
 import state from "./state";
 import update from "./update";
 
+// This file is used to call initialize functions associated with Flourish modules.
+// We intialize them here, and then import objects and functions into the relevant
+// files. For more information about the methods available in modules, see the
+// NPM documentation for specific modules that is linked to here:
+// https://developers.flourish.studio/sdk/getting-started/using-modules/
+
 var layout = initLayout(state.layout);
 var colors = createColors(state.color);
 var legend_container = createLegendContainer(state.legend_container);
