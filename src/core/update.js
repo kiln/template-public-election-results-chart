@@ -25,6 +25,10 @@ var gradient_width = 8;
 let prev_width = "";
 let prev_height = "";
 
+// When update is being called because the windows is resizing, we don't want
+// all of the animations to happen. This function checks if the chart has
+// changed size since the last update, and if so, passes a duration of 0 to
+// updateGraphic() to ensure animations don't happen.
 function getTransitionDuration() {
 	const curr_width = layout.getPrimaryWidth();
 	const width_change = prev_width !== curr_width;
