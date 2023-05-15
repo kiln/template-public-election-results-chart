@@ -3,9 +3,9 @@ import state from "./core/state";
 import update from "./core/update";
 import { processed_data } from "./process-data";
 
-// This function allows us to understand if there are any empty series' for the
+// This function allows us to understand if there are any empty series for the
 // next step.
-function emptyString (str) {
+function shouldShowSeries (str) {
 	if (str == "") return true;
 	else if (str == 0) return false;
 	else return false;
@@ -16,14 +16,15 @@ function emptyString (str) {
 function updateLegend() {
 	var legend_items = processed_data
 		.filter(function(d) {
-			return !(emptyString(d.actual_value) && state.hide_empty_legend_items);
+			console.log(d.actual_value);
+			return !(shouldShowSeries(d.actual_value) && state.hide_empty_legend_items);
 		})
 		.map(function(d) { return d.name; });
 	// Creates our categorical legend (since there is no numerical colour
 	// option),appending our previously processed data with our color palette.
 	// Adding user interaction function options for when users interact with
 	// the legend including lowering opacity when clicked. Find out more
-	// information here: 
+	// information here:
 	// https://developers.flourish.studio/sdk/getting-started/using-modules
 	legend_categorical
 		.data(legend_items, colors.getColor)
@@ -36,8 +37,8 @@ function updateLegend() {
 			update();
 		});
 
-		// Updated the legend container whenever a change is made. This also
-		// only needs to be used once if you have used multiple legend types.
+	// Updated the legend container whenever a change is made. This also
+	// only needs to be used once if you have used multiple legend types.
 	legend_container.update();
 }
 
