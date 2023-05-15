@@ -20,7 +20,7 @@ var current_highlight = {
 function processData() {
 	processed_data = [];
 	const filter_value = filter_control.value(); // Get current filter value
-	if (data.values_now.length > 0) { // If there is data..
+	if (data.values_now.length > 0) { // If there is data...
 		if (filter_value) { // And a filter...
 			var found_row = data.values_now.filter(function(row) {
 				return row.name == filter_value; // Filter data to current value

@@ -20,18 +20,23 @@ function updatePopup() {
 
 	// Select all '.bar' class elements
 	selectAll(".bar")
-		.on("mouseover", function() {  // On mouse over a bar element
-			const el = this.querySelector(".bar-background");  // Select the background of the bar
-			popup.mouseover(el, el.__data__);  // Trigger popup mouseover event, passing the element and its data
+		// On mouse over a bar element
+		.on("mouseover", function() {
+			const el = this.querySelector(".bar-background");
+			// Trigger popup mouseover event, passing the element and its data
+			popup.mouseover(el, el.__data__);
 		})
-		.on("mouseout", function() {  // On mouse out of a bar element
-			popup.mouseout();  // Trigger popup mouseout event
+		.on("mouseout", function() {
+			popup.mouseout();
 		})
-		.on("click", function() {  // On click of a bar element
-			const el = this.querySelector(".bar-background");  // Select the background of the bar
-			const data = el.__data__;  // Get the data of the bar element
-			const locked_id = data.id;  // Get the id of the data (used for locking functionality)
-			popup.click(el, data, locked_id);  // Trigger popup click event, passing the element, its data, and its id
+		// On click of a bar element
+		.on("click", function() {
+			const el = this.querySelector(".bar-background");
+			// Get the data of the bar element
+			const data = el.__data__;
+			// Get the id of the data (used for popup locking functionality)
+			const locked_id = data.id;
+			popup.click(el, data, locked_id);
 		});
 }
 

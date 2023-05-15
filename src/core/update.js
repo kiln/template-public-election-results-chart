@@ -11,6 +11,11 @@ import { getUniqueValuesFromBinding } from "@flourish/pocket-knife";
 import { svg, g_bar, line, plot_background, extra_bar } from "../create-dom";
 import { processData, updateScales, processed_data, x, max_value } from "../process-data";
 
+// The update() function runs every time something changes in the visualization,
+// including changes to datasheet(s), bindings or the state (either from the
+// visualization author changing settings, or from user interaction such as
+// changing a dropdown filter).
+
 export var parser;
 
 var chart_margin_bottom = 20;
@@ -29,10 +34,6 @@ function getTransitionDuration() {
 	prev_height = curr_height;
 	return width_change || height_change ? 0 : state.duration;
 }
-// The update() function runs every time something changes in the visualization,
-// including changes to datasheet(s), bindings or the state (either from the
-// visualization author changing settings, or from user interaction such as
-// changing a dropdown filter).
 
 // Typically, the main update function calls updates to various chart elements
 // (e.g. popups, controls, legend, etc.) and also includes a function like

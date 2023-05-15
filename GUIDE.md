@@ -1,3 +1,5 @@
+<!-- The content of this file will display on the template's showcase page, for
+example: https://app.flourish.studio/@flourish/election-results-chart -->
 # Election results chart
 This template is ideal for visualising election results. You can show one overall result, or specific regions that can be selected from a dropdown.
 
@@ -6,7 +8,7 @@ This template is ideal for visualising election results. You can show one overal
 - Add historical data to compare the current results to a previous election
 
 ## Data requirements
-Each row after the header should be a region (eg. a state, constituency or just "nationwide"). There should be a column for the name of the region, and a column for each party in the election. In the historical data sheet you can add data for a previous election. This sheet follows the same format as the current results, make sure to use exactly the same region and party names, as this is being used to compare the results. 
+Each row after the header should be a region (eg. a state, constituency or just "nationwide"). There should be a column for the name of the region, and a column for each party in the election. In the historical data sheet you can add data for a previous election. This sheet follows the same format as the current results, make sure to use exactly the same region and party names, as this is being used to compare the results.
 
 ## Tips
 - You can specify custom colors to represent the right parties in the "Chart colors" box
