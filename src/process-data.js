@@ -64,6 +64,9 @@ function processData() {
 			// Calculate a percentage point change between the data values
 			const value_change = historical_value ? Math.round((parser(d) - parser(historical_value)) * 10) / 10 : null;
 			const arrow_up = "↑ ", arrow_down = "↓ ";
+			let arrow = "";
+			if (value_change > 0) arrow = arrow_up;
+			else if (value_change < 0) arrow = arrow_down;
 			const suffix = state.value_change_abbreviation;
 
 			// For right-to-left languages (RTL) we'll need to reverse the
@@ -77,10 +80,10 @@ function processData() {
 			// negative values with a '-' sign, we are returing absolute values
 			// and showing an up or down arrow to indicate the direction of change
 			if (is_rtl) {
-				value_change_formatted = d.value_change > 0 ? arrow_up + suffix + value_change : arrow_down + suffix + Math.abs(value_change);
+				value_change_formatted = arrow + suffix + Math.abs(value_change);
 			}
 			else {
-				value_change_formatted = d.value_change > 0 ? arrow_up + value_change + suffix : arrow_down + Math.abs(value_change) + suffix;
+				value_change_formatted = arrow + Math.abs(value_change) + suffix;
 			}
 
 			// Pass the data needed for the visualization onto processed_data
